@@ -1,0 +1,30 @@
+﻿@page "/RoomView"
+@using HotelBlazro.Data
+<h3>RoomViews</h3>
+
+@foreach (var room in _rooms)
+{
+    @room.Name
+    @room.Persons
+    @room.RoomNumber
+    @room.Price
+    @room.Active
+    
+    @foreach (var supp in room.Supplements)
+    {
+        @supp.Description
+        @supp.Price
+        @supp.Selected
+    }
+}
+@code {
+    private ServiceHotel _hotel = new ServiceHotel();
+    private List<Room> _rooms;
+
+
+    protected override void OnInitialized()
+    {
+        _rooms = _hotel.Rooms();
+    }
+
+}
