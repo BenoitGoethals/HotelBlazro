@@ -2,17 +2,17 @@
 
 namespace HotelBlazro.Data
 {
-    public class ServiceHotel
+    public class HotelService
     {
-        private List<Room> _rooms = new List<Room>();
-        private List<Supplement> _supplements = new List<Supplement>();
+        private readonly List<Room> _rooms = new List<Room>();
+        private readonly List<Supplement> _supplements = new List<Supplement>();
 
         public void AddRoom(Room room)
         {
             _rooms.Add(room);
         }
 
-        public ServiceHotel()
+        public HotelService()
         {
             _supplements.Add(new Supplement()
             {

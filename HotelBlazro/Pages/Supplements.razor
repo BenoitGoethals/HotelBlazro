@@ -1,0 +1,27 @@
+﻿@using HotelBlazro.Data
+<div class="card-body">
+    <div class="card  bg-info text-white">
+        Supplements
+
+        @foreach (var supp in SupplementsList)
+        {
+            <div class="card">
+                <div class="card-body  bg-info text-white">
+                    <h5 class="card-title">Description : @supp.Description</h5>
+                    <p class="card-text">
+                        Price : @supp.Price
+                    </p>
+                    <p class="card-text">
+                        <input checked="@supp.Selected" type="checkbox" value="@supp.Selected" disabled="disabled">
+
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<Supplement> SupplementsList { get; set; }
+}

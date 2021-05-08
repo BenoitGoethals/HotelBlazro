@@ -1,30 +1,34 @@
 ﻿@page "/RoomView"
 @using HotelBlazro.Data
-<h3>RoomViews</h3>
+@inject HotelService _service
 
-@foreach (var room in _rooms)
-{
-    @room.Name
-    @room.Persons
-    @room.RoomNumber
-    @room.Price
-    @room.Active
-    
-    @foreach (var supp in room.Supplements)
+<h3>Rooms</h3>
+<div class="card-columns">
+    @foreach (var room in _rooms)
     {
-        @supp.Description
-        @supp.Price
-        @supp.Selected
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h4 class="card-title">Room : @room.Name</h4>
+                <p class="card-text">Nmr: @room.RoomNumber</p>
+                <p class="card-text">Persons @room.Persons</p>
+                <p class="card-text">Price @room.Price Euro</p>
+                <p class="card-text">
+                    <input checked="@room.Active" type="checkbox" value="@room.Active" disabled="disabled">
+                </p>
+                <Supplements SupplementsList="@room.Supplements"></Supplements>
+            </div>
+        </div>
     }
-}
+</div>
+
 @code {
-    private ServiceHotel _hotel = new ServiceHotel();
+
     private List<Room> _rooms;
 
 
     protected override void OnInitialized()
     {
-        _rooms = _hotel.Rooms();
+        _rooms = _service.Rooms();
     }
 
 }
