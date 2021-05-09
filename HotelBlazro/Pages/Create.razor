@@ -1,18 +1,104 @@
-﻿@page "/Create" 
-
-<h3>Create</h3>
+﻿@page "/Create/{id}" 
+@using HotelBlazro.Data
+@using Microsoft.VisualBasic.CompilerServices
+@using System.Data.Common
+@using System.Runtime.CompilerServices
+@inject HotelService _service
+<h3 xmlns="http://www.w3.org/1999/html">Create</h3>
 
 <div class="row mt-2 mb-5">
-<div class="col-md-12">
-    <div class="card">
-        <div class="card-body">
-            <EditForm>
-                
-            </EditForm>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <EditForm Model="@RoomEdit" OnValidSubmit="@HandleValidSubmit">
+                    <DataAnnotationsValidator/>
+                    <ValidationSummary/>
+
+                    <p>
+                        <label>
+                            Name
+                            <InputText id="name" @bind-Value="RoomEdit.Name"/>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            Active
+                            <InputCheckbox id="name" @bind-Value="RoomEdit.Active"/>
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            Price :
+                            <InputNumber id="name" @bind-Value="RoomEdit.Price"/>
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            Price :
+                            <InputNumber id="name" @bind-Value="RoomEdit.Persons"/>
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            RoomNumber :
+                            <InputText id="name" @bind-Value="RoomEdit.RoomNumber"/>
+                        </label>
+                    </p>
+                    <br />
+                    <div class="card">
+                        <div class="card-body">
+                            @foreach (var supp in RoomEdit.Supplements)
+                            {
+                                <p>
+                                    <label>
+                                        Description :
+                                        <InputText id="name" @bind-Value="supp.Description"/>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        RoomNumber :
+                                        <InputNumber id="name" @bind-Value="supp.Price"/>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        RoomNumber :
+                                        <InputCheckbox id="name" @bind-Value="RoomEdit.Active"/>
+                                    </label>
+                                </p>
+                            }
+                        </div>
+                    </div>
+
+                    <button type="submit">Submit</button>
+                </EditForm>
+
+            </div>
         </div>
     </div>
 </div>
-</div>
+
 @code {
-    
+
+    [Parameter]
+    public string Id { get; set; }
+
+    private Room RoomEdit { get; set; } = new Room();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        RoomEdit = _service.Rooms().First(t => t.Id.Equals(Convert.ToInt32(Id)));
+    }
+
+    private void HandleValidSubmit()
+    {
+        throw new NotImplementedException();
+    }
+
 }

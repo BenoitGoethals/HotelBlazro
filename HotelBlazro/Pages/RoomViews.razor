@@ -17,6 +17,8 @@
                 </p>
                 <Supplements SupplementsList="@room.Supplements"></Supplements>
             </div>
+            <NavLink href="@($"Create/{@room.Id.ToString()}")"  class="btn btn-info form-control">Edit Room</NavLink>
+            <NavLink href="Delete" class="btn btn-info form-control">Delete Room</NavLink>
         </div>
     }
 </div>
