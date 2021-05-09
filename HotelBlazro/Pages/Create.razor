@@ -4,78 +4,79 @@
 @using System.Data.Common
 @using System.Runtime.CompilerServices
 @inject HotelService _service
+@inject NavigationManager _manager
 <h3 xmlns="http://www.w3.org/1999/html">Create</h3>
-
+@inject IJSRuntime JsRuntime
 <div class="row mt-2 mb-5">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-
                 <EditForm Model="@RoomEdit" OnValidSubmit="@HandleValidSubmit">
                     <DataAnnotationsValidator/>
                     <ValidationSummary/>
 
-                    <p>
+                    <div class="form-group">
                         <label>
                             Name
-                            <InputText id="name" @bind-Value="RoomEdit.Name"/>
+                            <InputText id="name" @bind-Value="RoomEdit.Name" class="form-control" />
                         </label>
-                    </p>
-                    <p>
+                    </div>
+                     <div class="form-group">
                         <label>
                             Active
-                            <InputCheckbox id="name" @bind-Value="RoomEdit.Active"/>
+                            <InputCheckbox id="active" @bind-Value="RoomEdit.Active" class="form-control" />
                         </label>
-                    </p>
+                    </div>
 
-                    <p>
+                     <div class="form-group">
                         <label>
                             Price :
-                            <InputNumber id="name" @bind-Value="RoomEdit.Price"/>
+                            <InputNumber id="price" @bind-Value="RoomEdit.Price" class="form-control" />
                         </label>
-                    </p>
+                   </div>
 
-                    <p>
+                     <div class="form-group">
                         <label>
                             Price :
-                            <InputNumber id="name" @bind-Value="RoomEdit.Persons"/>
+                            <InputNumber id="persons" @bind-Value="RoomEdit.Persons" class="form-control" />
                         </label>
-                    </p>
+                   </div>
 
-                    <p>
+                     <div class="form-group">
                         <label>
                             RoomNumber :
-                            <InputText id="name" @bind-Value="RoomEdit.RoomNumber"/>
+                            <InputText id="roomnumber" @bind-Value="RoomEdit.RoomNumber" class="form-control" />
                         </label>
-                    </p>
+                    </div>
                     <br />
                     <div class="card">
                         <div class="card-body">
                             @foreach (var supp in RoomEdit.Supplements)
                             {
-                                <p>
-                                    <label>
+                                 <div class="form-group">
+                                    <label class="alert-info">
                                         Description :
-                                        <InputText id="name" @bind-Value="supp.Description"/>
+                                        <InputText id="Desc" @bind-Value="supp.Description"/>
                                     </label>
-                                </p>
-                                <p>
+                                 </div>
+                               <div class="form-group">
                                     <label>
                                         RoomNumber :
-                                        <InputNumber id="name" @bind-Value="supp.Price"/>
+                                        <InputNumber id="Pricesupp" @bind-Value="supp.Price"/>
                                     </label>
-                                </p>
-                                <p>
+                               </div>
+                                <div class="form-group">
                                     <label>
                                         RoomNumber :
-                                        <InputCheckbox id="name" @bind-Value="RoomEdit.Active"/>
+                                        <InputCheckbox id="Activesupp" @bind-Value="supp.Selected"/>
                                     </label>
-                                </p>
+                                </div>
                             }
                         </div>
                     </div>
 
-                    <button type="submit">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <NavLink href="/" class="btn btn-secondary">Home</NavLink>
                 </EditForm>
 
             </div>
@@ -93,12 +94,18 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        RoomEdit = _service.Rooms().First(t => t.Id.Equals(Convert.ToInt32(Id)));
+        if (Convert.ToInt32(Id) != 0)
+        {
+            RoomEdit = _service.Rooms().First(t => t.Id.Equals(Convert.ToInt32(Id)));
+        }
+    
     }
 
-    private void HandleValidSubmit()
+    private async Task HandleValidSubmit()
     {
-        throw new NotImplementedException();
+        _service.AddUpdateRoom(RoomEdit);
+        await JsRuntime.ShowSucces("Room Saved");
+        _manager.NavigateTo("/");
     }
 
 }

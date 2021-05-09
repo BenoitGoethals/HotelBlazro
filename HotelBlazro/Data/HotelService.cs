@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace HotelBlazro.Data
 {
@@ -7,9 +8,18 @@ namespace HotelBlazro.Data
         private readonly List<Room> _rooms = new List<Room>();
         private readonly List<Supplement> _supplements = new List<Supplement>();
 
-        public void AddRoom(Room room)
+        public void AddUpdateRoom(Room room)
         {
-            _rooms.Add(room);
+            if (room.Id == 0)
+            {
+                room.Id = _rooms.Max(t => t.Id) + 1;
+                _rooms.Add(room);
+            }
+            else
+            {
+                
+            }
+            
         }
 
         public HotelService()
@@ -33,7 +43,23 @@ namespace HotelBlazro.Data
             _rooms.Add(new Room()
             {
                 Id = 1, Name = "kkk", Active = false, Price = 10, Persons = 10, RoomNumber = "1",
-                Supplements = _supplements
+                Supplements = new List<Supplement>()
+                {
+                    new Supplement()
+                    {
+                        Description = "bsdar",
+                        Id = 3,
+                        Price = 10,
+                        Selected = true
+                    },
+                    new Supplement()
+                    {
+                        Description = "wddwbar",
+                        Id = 4,
+                        Price = 10,
+                        Selected = false
+                    }
+                }
               
             });
             _rooms.Add(new Room()
