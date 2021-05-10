@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="22e2554e-9b5b-416d-8d2b-a249a1d95dd4">
-        <schema name="hotel" object-types="function, procedure, constraint, dataset trigger, table, column, index, view" />
+        <schema name="hotel" object-types="table, column, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -36,15 +36,13 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="22e2554e-9b5b-416d-8d2b-a249a1d95dd4" object-ref="schemas/hotel/tables/Rooms" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="22e2554e-9b5b-416d-8d2b-a249a1d95dd4" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="22e2554e-9b5b-416d-8d2b-a249a1d95dd4" dataset="hotel.Rooms" active-filter-id="ad310978-ceef-4bb5-958b-b8f2ff107c64">
+    <filter-actions connection-id="22e2554e-9b5b-416d-8d2b-a249a1d95dd4" dataset="hotel.Rooms" active-filter-id="EMPTY_FILTER">
       <filter id="ad310978-ceef-4bb5-958b-b8f2ff107c64" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="Id" operator="=" value="" active="true" />
       </filter>
