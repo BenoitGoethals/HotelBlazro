@@ -97,13 +97,13 @@
        
     }
 
-    protected override  Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         int id = Convert.ToInt32(Id);
         if (id != 0)
         {
-            return Task.FromResult()
-            RoomEdit = _service.GetRoom(id).Result;
+          
+            RoomEdit = await _service.GetRoom(id);
         }
 
     }

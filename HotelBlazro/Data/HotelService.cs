@@ -84,9 +84,9 @@ namespace HotelBlazro.Data
             return await Task.FromResult<List<Room>>(_rooms);
         }
 
-        public Task<Room> GetRoom(int Id)
+        public async Task<Room> GetRoom(int id)
         {
-            throw new System.NotImplementedException();
+            return _rooms.FirstOrDefault(t=>t.Id.Equals(id));
         }
     }
 }

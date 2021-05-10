@@ -6,17 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelBlazro.Data
 {
-    public class HotelMariaDBService:IHotelService
+    public class HotelMariaDbService:IHotelService
     {
-        private HotelContext _hotelContext;
+        private readonly HotelContext _hotelContext;
         
-        public HotelMariaDBService(HotelContext hotelContext)
+        public HotelMariaDbService(HotelContext hotelContext)
         {
             _hotelContext = hotelContext;
         }
         public void AddUpdateRoom(Room room)
         {
-            throw new System.NotImplementedException();
+            _hotelContext.Rooms.Update(room);
+            _hotelContext.SaveChanges();
         }
 
         public async Task<List<Room>> Rooms()

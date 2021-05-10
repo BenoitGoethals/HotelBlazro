@@ -27,13 +27,13 @@ namespace HotelBlazro
             services.AddDbContextPool<HotelContext>(options => options
                 .UseMySql(
                     Configuration.GetConnectionString("MariaDbConnectionString"),
-                    new MariaDbServerVersion(new Version(10,5,4)))
+                    new MariaDbServerVersion(new Version(5,5,57)))
                     
             );
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
-            services.AddSingleton<HotelService>();
+            services.AddScoped<IHotelService,HotelMariaDbService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

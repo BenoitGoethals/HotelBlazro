@@ -8,11 +8,12 @@ namespace HotelBlazro.Repos
     public class HotelContext:DbContext
     {
         private readonly IConfiguration _config;
-        public HotelContext(IConfiguration config, DbContextOptions<HotelContext> options)
-            : base(options) {
-            _config = config ?? throw new System.ArgumentNullException(nameof(config));
 
+        public HotelContext(DbContextOptions<HotelContext> options)
+            : base(options) {
         }
+
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

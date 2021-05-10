@@ -4,23 +4,33 @@
 
 <h3>Rooms</h3>
 <div class="card-columns">
-    @foreach (var room in _rooms)
+    @if (_rooms != null)
+    {
+        @foreach (var room in _rooms)
+        {
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h4 class="card-title">Room : @room.Name</h4>
+                    <p class="card-text">Nmr: @room.RoomNumber</p>
+                    <p class="card-text">Persons @room.Persons</p>
+                    <p class="card-text">Price @room.Price Euro</p>
+                    <p class="card-text">
+                        <input checked="@room.Active" type="checkbox" value="@room.Active" disabled="disabled">
+                    </p>
+                    <Supplements SupplementsList="@room.Supplements"></Supplements>
+                </div>
+                <NavLink href="@($"Create/{@room.Id.ToString()}")" class="btn btn-info form-control">Edit Room</NavLink>
+                <NavLink href="Delete" class="btn btn-info form-control">Delete Room</NavLink>
+            </div>
+        }
+    }
+    else
     {
         <div class="card bg-primary text-white">
-            <div class="card-body">
-                <h4 class="card-title">Room : @room.Name</h4>
-                <p class="card-text">Nmr: @room.RoomNumber</p>
-                <p class="card-text">Persons @room.Persons</p>
-                <p class="card-text">Price @room.Price Euro</p>
-                <p class="card-text">
-                    <input checked="@room.Active" type="checkbox" value="@room.Active" disabled="disabled">
-                </p>
-                <Supplements SupplementsList="@room.Supplements"></Supplements>
-            </div>
-            <NavLink href="@($"Create/{@room.Id.ToString()}")"  class="btn btn-info form-control">Edit Room</NavLink>
-            <NavLink href="Delete" class="btn btn-info form-control">Delete Room</NavLink>
+            <h2>No Rooms</h2>
         </div>
     }
+
 </div>
 
 @code {
@@ -33,9 +43,7 @@
         _rooms = await _service.Rooms();
     }
 
-    protected override void OnInitialized()
-    {
-       
-    }
+
 
 }
+
