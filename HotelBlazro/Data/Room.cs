@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelBlazro.Data
 {
     public class Room
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        [StringLength(10, ErrorMessage = "Name is too long.")]
+        [StringLength(100, ErrorMessage = "Name is too long.")]
+            
         public string Name { get; set; }
         [Required]
         public string RoomNumber { get; set; }

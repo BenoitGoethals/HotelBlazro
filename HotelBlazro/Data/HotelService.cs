@@ -1,9 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HotelBlazro.Data
 {
-    public class HotelService
+    public interface IHotelService
+    {
+        void AddUpdateRoom(Room room);
+        Task<List<Room>> Rooms();
+
+        Task<Room> GetRoom(int Id);
+    }
+
+    public class HotelService : IHotelService
     {
         private readonly List<Room> _rooms = new List<Room>();
         private readonly List<Supplement> _supplements = new List<Supplement>();
@@ -70,9 +79,14 @@ namespace HotelBlazro.Data
             });
         }
 
-        public List<Room> Rooms()
+        public async Task<List<Room>> Rooms()
         {
-            return _rooms;
+            return await Task.FromResult<List<Room>>(_rooms);
+        }
+
+        public Task<Room> GetRoom(int Id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

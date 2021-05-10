@@ -1,6 +1,6 @@
 ﻿@page "/RoomView"
 @using HotelBlazro.Data
-@inject HotelService _service
+@inject IHotelService _service
 
 <h3>Rooms</h3>
 <div class="card-columns">
@@ -28,9 +28,14 @@
     private List<Room> _rooms;
 
 
+    protected override async Task OnInitializedAsync()
+    {
+        _rooms = await _service.Rooms();
+    }
+
     protected override void OnInitialized()
     {
-        _rooms = _service.Rooms();
+       
     }
 
 }
