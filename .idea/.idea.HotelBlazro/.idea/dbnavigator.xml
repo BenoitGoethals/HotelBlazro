@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="22e2554e-9b5b-416d-8d2b-a249a1d95dd4">
-        <schema name="hotel" object-types="table, column, view" />
+        <schema name="hotel" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>

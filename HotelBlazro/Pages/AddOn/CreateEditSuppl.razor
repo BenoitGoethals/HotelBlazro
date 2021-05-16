@@ -11,20 +11,20 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <EditForm Model="@_Supplement" OnValidSubmit="@HandleValidSubmit">
+                <EditForm Model="@Supplement" OnValidSubmit="@HandleValidSubmit">
                     <DataAnnotationsValidator/>
                     <ValidationSummary/>
 
                                  <div class="form-group">
                                     <label class="alert-info">
                                         Description :
-                                        <InputText id="Desc" @bind-Value="_Supplement.Description"/>
+                                        <InputText id="Desc" @bind-Value="Supplement.Description"/>
                                     </label>
                                  </div>
                                <div class="form-group">
                                     <label>
                                         Price :
-                                        <InputNumber id="Pricesupp" @bind-Value="_Supplement.Price"/>
+                                        <InputNumber id="Pricesupp" @bind-Value="Supplement.Price"/>
                                     </label>
                                </div>
                             
@@ -41,8 +41,9 @@
 
     [Parameter]
     public int Id { get; set; }
+    [Parameter] public EventCallback<Supplement> ValueChanged { get; set; }
 
-    private Supplement _Supplement { get; set; } = new Supplement();
+    private Supplement Supplement { get; set; } = new Supplement();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -50,24 +51,25 @@
         if (Id != 0)
         {
           
-            _Supplement = await _service.GetSupplement(Id);
+            Supplement = await _service.GetSupplement(Id);
         }
     }
 
   
     private async Task HandleValidSubmit()
     {
-        _service.AddUpdateSupplements(_Supplement);
+        _service.AddUpdateSupplements(Supplement);
         Reset();
         await JsRuntime.ShowSucces("Room Saved");
-        await InvokeAsync(StateHasChanged);
+        await ValueChanged.InvokeAsync();
+     //   await InvokeAsync(StateHasChanged);
       //  _manager.NavigateTo("/");
     }
 
     private void Reset()
     {
         Id = 0;
-        _Supplement = new Supplement();
+        Supplement = new Supplement();
        
     }
 

@@ -1,11 +1,12 @@
 ﻿@using HotelBlazro.Data
+@inject IHotelService _service
 <div class="card-body">
     <div class="card  bg-info text-white">
         Supplements
 
-        @if (SupplementsList!=null)
+        @if (_supplements!=null)
         {
-             @foreach (var supp in SupplementsList)
+             @foreach (var supp in _supplements)
                     {
                         <div class="card">
                             <div class="card-body  bg-info text-white">
@@ -25,10 +26,9 @@
        
     </div>
 </div>
-<CreateEditSuppl Id="@Id" ></CreateEditSuppl>
+<CreateEditSuppl Id="@Id" ValueChanged="ListChanged" ></CreateEditSuppl>
 @code {
-    [Parameter]
-    public List<Supplement> SupplementsList { get; set; }
+    
 
     private int Id
     {
@@ -40,11 +40,22 @@
         }
     }
 
+    private List<Supplement> _supplements;
 
+    protected override async Task OnInitializedAsync()
+    {
+        _supplements = await _service.Supplements();
+    }
     private void Selected(Supplement supp)
     {
         Id = supp.Id;
     }
 
     private int _id;
+
+    public  async Task ListChanged(Supplement supplement)
+    {
+      await  OnInitializedAsync();
+    }
+
 }
