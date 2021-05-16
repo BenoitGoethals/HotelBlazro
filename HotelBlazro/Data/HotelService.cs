@@ -4,14 +4,6 @@ using System.Threading.Tasks;
 
 namespace HotelBlazro.Data
 {
-    public interface IHotelService
-    {
-        void AddUpdateRoom(Room room);
-        Task<List<Room>> Rooms();
-
-        Task<Room> GetRoom(int Id);
-    }
-
     public class HotelService : IHotelService
     {
         private readonly List<Room> _rooms = new List<Room>();
@@ -86,7 +78,22 @@ namespace HotelBlazro.Data
 
         public async Task<Room> GetRoom(int id)
         {
-            return _rooms.FirstOrDefault(t=>t.Id.Equals(id));
+            return  _rooms.FirstOrDefault(t=>t.Id.Equals(id));
+        }
+
+        public Task<List<Supplement>> Supplements()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Supplement> GetSupplement(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddUpdateSupplements(Supplement supplement)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

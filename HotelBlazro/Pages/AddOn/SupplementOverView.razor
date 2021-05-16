@@ -1,0 +1,16 @@
+﻿@page "/SupplementOverView"
+
+@using HotelBlazro.Data
+@inject IHotelService _service
+<h3>SupplementOverView</h3>
+<Supplements SupplementsList="@_supplements"></Supplements>
+   <NavLink href="/" class="btn btn-secondary">Home</NavLink>
+@code {
+    private List<Supplement> _supplements;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _supplements = await _service.Supplements();
+    }
+
+}

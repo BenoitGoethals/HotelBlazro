@@ -30,5 +30,21 @@ namespace HotelBlazro.Data
          
            return _hotelContext.Rooms.FirstOrDefaultAsync(t => t.Id.Equals(Id));
         }
+
+        public async Task<List<Supplement>> Supplements()
+        {
+            return await _hotelContext.Supplements.ToListAsync();
+        }
+
+        public async Task<Supplement> GetSupplement(int id)
+        {
+            return await _hotelContext.Supplements.FirstOrDefaultAsync(t => t.Id.Equals(id));
+        }
+
+        public void AddUpdateSupplements(Supplement supplement)
+        {
+            _hotelContext.Supplements.Update(supplement);
+            _hotelContext.SaveChanges();
+        }
     }
 }

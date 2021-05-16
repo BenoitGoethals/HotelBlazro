@@ -13,5 +13,7 @@ namespace HotelBlazro.Repos
             builder.Property(s => s.Price).HasColumnName(nameof(Supplement.Price)).IsRequired();
             builder.Property(s => s.Selected).HasColumnName(nameof(Supplement.Selected)).IsRequired();
         }
+        
+        
     }
 }

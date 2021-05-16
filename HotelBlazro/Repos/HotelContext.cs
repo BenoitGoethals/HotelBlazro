@@ -18,7 +18,10 @@ namespace HotelBlazro.Repos
         {
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+            modelBuilder.Entity<Supplement>().HasData(
+                new Supplement(){Id=1,Description = "Koffie Machine",Price = 10,Selected = false}
+                ,new Supplement(){Id=2,Description = "WAS Machine",Price = 10,Selected = false}
+                );
 
 
         }
