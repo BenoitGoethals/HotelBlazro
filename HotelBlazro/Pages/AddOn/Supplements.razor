@@ -1,5 +1,6 @@
 ﻿@using HotelBlazro.Data
 @inject IHotelService _service
+@inject IJSRuntime JsRuntime
 <div class="card-body">
     <div class="card  bg-info text-white">
         Supplements
@@ -19,7 +20,8 @@
             
                                 </p>
                             </div>
-                             <button @onclick="() => Selected(supp)">Edit</button>
+                            <button @onclick="() => Selected(supp)">Edit</button>
+                             <button @onclick="() => Delete(supp)">Delete</button>
                         </div>
                     }
         }
@@ -52,6 +54,13 @@
     }
 
     private int _id;
+
+    private async Task Delete(Supplement supplement)
+    {
+        _service.Delete(supplement);
+        await JsRuntime.ShowSucces("Room Deleted");
+        await  OnInitializedAsync();
+    }
 
     public  async Task ListChanged(Supplement supplement)
     {

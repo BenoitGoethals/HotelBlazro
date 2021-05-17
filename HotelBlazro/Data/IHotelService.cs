@@ -12,5 +12,6 @@ namespace HotelBlazro.Data
         Task<List<Supplement>> Supplements();
         Task<Supplement> GetSupplement(int id);
         void AddUpdateSupplements(Supplement supplement);
+        void Delete(Supplement supplement);
     }
 }

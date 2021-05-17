@@ -46,5 +46,11 @@ namespace HotelBlazro.Data
             _hotelContext.Supplements.Update(supplement);
             _hotelContext.SaveChanges();
         }
+
+        public void Delete(Supplement supplement)
+        {
+            _hotelContext.Supplements.Remove(supplement);
+            _hotelContext.SaveChanges();
+        }
     }
 }

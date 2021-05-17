@@ -95,5 +95,10 @@ namespace HotelBlazro.Data
         {
             throw new System.NotImplementedException();
         }
+
+        public void Delete(Supplement supplement)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
